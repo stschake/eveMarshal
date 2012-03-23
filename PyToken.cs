@@ -32,9 +32,15 @@ namespace eveMarshal
         {
             output.WriteOpcode(MarshalOpcode.Token);
             if (RawToken != null)
+            {
+                output.Write((byte)RawToken.Length);
                 output.Write(RawToken);
+            }
             else if (Token != null)
+            {
+                output.Write((byte)Token.Length);
                 output.Write(Encoding.ASCII.GetBytes(Token));
+            }
             else
                 throw new InvalidDataException("Fill either RawToken or Token with data for encoding");
         }
